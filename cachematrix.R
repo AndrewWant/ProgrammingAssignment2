@@ -19,11 +19,13 @@ makeCacheMatrix <- function(mtx = matrix()) {
 
 cacheSolve <- function(mtx, ...) {
         ## Return a matrix that is the inverse of 'x'
-    if(is.null(inverse_matrix)){
+    if(is.null(inverse_matrix) && nrow(mtx) == ncol(mtx)){
         matrix_for_solve <- mtx$get()
         inverse_matrix <<- solve(matrix_for_solve)
         message("Matrix has been inverted")
-    } else {
+    } else if (nrow(mtx) != ncol(mtx)){
+        message("Matrix is not square")
+    }else {
         message("Inverse matrix already exists")
         inverse_matrix
     }
